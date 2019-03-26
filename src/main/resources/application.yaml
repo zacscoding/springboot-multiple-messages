@@ -1,0 +1,37 @@
+# Rpc configs
+rpc:
+  ## -- rpc common configs
+  enabled: true # enable rpc server
+  type: activemq # rpc types ["activemq", "rabbitmq", "kafka"]
+  excutors:
+    core: 0 # number of rpc execute thread pool core (default jvm available processor)
+    maxPoolSize: 100 # max pool size of rpc execution thread pool (default 100)
+  ## -- activemq properties
+  activemq:
+    queue:
+      request: requestQueue # request que name
+      response: responseQueue # response que name
+      concurrent: # rpc concurrent
+        request: 5
+        response: 5
+
+  ## -- rabbitmq properties
+  rabbitmq:
+    host: 127.0.0.1
+    user: test
+    password: test
+    queue:
+      exchange: exchange.rpc # name of rpc exchange
+      route: rpc # name of rpc route key
+      request: requestQueue # name of rpc request queue
+    concurrent:
+      request: 5 #rpc request queue consumer
+  ## -- kafka properties
+  kafka:
+    boostrap:
+      servers: 127.0.0.1 # kafka brokers
+    topic:
+      request: requestTopic # request topic
+      response: replyTopic # response topic
+    consumer:
+      group: requestreplygroup
