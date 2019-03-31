@@ -22,11 +22,20 @@ public class RpcQueueApplication {
 
     private static void displayBeans(ConfigurableApplicationContext ctx) {
         String[] beanNames = ctx.getBeanDefinitionNames();
-        logger.info("Bean names : ", Arrays.toString(beanNames));
+
         for (String beanName : beanNames) {
-            if (beanName.toLowerCase().contains("activemq")) {
-                logger.info("activemq bean : {}", beanName);
+            if (isDisplayBean(beanName)) {
+                logger.info("Bean : {}", beanName);
             }
         }
+    }
+
+    private static boolean isDisplayBean(String beanName) {
+        String lowerCase = beanName.toLowerCase();
+        // amqp
+        return lowerCase.contains("activemq") ||
+            lowerCase.contains("amqp") ||
+            lowerCase.contains("kafka") ||
+            lowerCase.startsWith("server");
     }
 }
