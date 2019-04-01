@@ -2,7 +2,7 @@
 rpc:
   ## -- rpc common configs
   enabled: true # enable rpc server
-  type: rabbitmq # rpc types ["activemq", "rabbitmq", "kafka"]
+  type: activemq # rpc types ["activemq", "rabbitmq", "kafka"]
   excutors:
     core: 0 # number of rpc execute thread pool core (default jvm available processor)
     maxPoolSize: 100 # max pool size of rpc execution thread pool (default 100)

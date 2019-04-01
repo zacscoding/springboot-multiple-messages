@@ -34,23 +34,18 @@ public class RpcQueueApplication {
 2019-03-26 21:36:31.395  INFO 3448 --- [  restartedMain] server.RpcQueueApplication               : activemq bean : spring.activemq-org.springframework.boot.autoconfigure.jms.activemq.ActiveMQProperties
 ```  
 
-이유는 @SpringBootApplication을 살펴보면 @EnableAutoConfiguration이 있는 것을 확인할 수 있음  
+이유는 spring-boot-autoconfigure-{version.jar} 파일을 보시면  
 
-> @SpringBootApplication  
+META-INF/spring.factories에 ActiveMQAutoConfiguration 이 존재하기 때문입니다.  
 
-```aidl
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Inherited
-@SpringBootConfiguration
-@EnableAutoConfiguration
-@ComponentScan(excludeFilters = {
-		@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
-		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
-public @interface SpringBootApplication {
-  ...
-}
+```$xslt
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\
+...
+
+org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration,\
+...
 ```  
 
 또한 org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration 클래스를 살펴보면  

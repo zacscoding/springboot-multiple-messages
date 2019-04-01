@@ -1,6 +1,5 @@
-package server.rpc;
+package server.rpc.execute;
 
-import java.util.concurrent.CountDownLatch;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,9 +16,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class RpcResponse {
+public class RpcExecuteResult {
 
-    private transient CountDownLatch countDownLatch = new CountDownLatch(1);
-    private String requestId;
-    private String responseBody;
+    private String response;
+    private Throwable error;
+
+    public boolean hasError() {
+        return error != null;
+    }
 }
