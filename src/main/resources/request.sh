@@ -3,13 +3,13 @@
 PAYLOAD=$1
 SLEEP=$2
 
-if [ -z "$SLEEP" ]
+if [[ -z "$SLEEP" ]]
 then
     SLEEP=0
 fi
 
 
-if [ -z "$PAYLOAD" ]
+if [[ -z "$PAYLOAD" ]]
 then
     PAYLOAD="zaccoding"
 fi
@@ -30,4 +30,3 @@ EOF
 curl -H "Content-Type: application/json" \
          --data "$(generate_data)" \
          -X POST localhost:8080/rpc
-echo \n
