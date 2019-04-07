@@ -2,7 +2,8 @@
 rpc:
   ## -- rpc common configs
   enabled: true # enable rpc server
-  type: activemq # rpc types ["activemq", "rabbitmq", "kafka"]
+  type: rabbitmq # rpc types ["activemq", "rabbitmq", "kafka"]
+  timeout: 5000
   excutors:
     core: 0 # number of rpc execute thread pool core (default jvm available processor)
     maxPoolSize: 100 # max pool size of rpc execution thread pool (default 100)
@@ -17,9 +18,9 @@ rpc:
 
   ## -- rabbitmq properties
   rabbitmq:
-    host: 127.0.0.1
-    user: test
-    password: test
+    host: 192.168.79.130
+    user: rabbitmq
+    password: rabbitmq
     queue:
       exchange: exchange.rpc # name of rpc exchange
       route: rpc # name of rpc route key

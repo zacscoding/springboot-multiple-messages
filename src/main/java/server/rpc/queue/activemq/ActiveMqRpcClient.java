@@ -51,9 +51,7 @@ public class ActiveMqRpcClient implements RpcClient, MessageListener {
     @Override
     public RpcResponse call(RpcRequest request) {
 
-        RpcResponse rpcResponse = new RpcResponse();
-        rpcResponse.setRequestId(request.getRequestId());
-
+        RpcResponse rpcResponse = new RpcResponse(request, true);
         final String correlationID = UUID.randomUUID().toString();
         concurrentMap.put(correlationID, rpcResponse);
 

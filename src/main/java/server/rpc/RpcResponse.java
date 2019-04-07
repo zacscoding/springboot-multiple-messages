@@ -13,13 +13,25 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @ToString
 public class RpcResponse {
 
     private transient CountDownLatch countDownLatch = new CountDownLatch(1);
     private String requestId;
     private String responseBody;
+
+    public RpcResponse() {
+    }
+
+    public RpcResponse(RpcRequest request) {
+        this(request, false);
+    }
+
+    public RpcResponse(RpcRequest request, boolean useCountdownLatch) {
+        if (useCountdownLatch) {
+            this.countDownLatch = new CountDownLatch(1);
+        }
+
+        this.requestId = request.getRequestId();
+    }
 }

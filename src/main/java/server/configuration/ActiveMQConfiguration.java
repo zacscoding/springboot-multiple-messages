@@ -5,12 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
@@ -30,7 +30,7 @@ import server.rpc.queue.activemq.ActiveMqRpcServer;
 @Configuration
 @ConditionalOnBean(value = {RpcConfiguration.class})
 @Conditional(value = ActiveMQEnabledCondition.class)
-@Import({ActiveMQAutoConfiguration.class})
+@AutoConfigureAfter({ActiveMQAutoConfiguration.class})
 public class ActiveMQConfiguration {
 
     /**
